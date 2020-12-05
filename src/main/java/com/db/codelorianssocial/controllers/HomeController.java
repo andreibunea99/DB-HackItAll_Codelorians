@@ -18,6 +18,7 @@ import java.util.List;
 public class HomeController {
 
     boolean hidden = true;
+    String myUser = "Cosmin";
 
     RoomsService roomsService = new RoomsService();
 
@@ -45,9 +46,6 @@ public class HomeController {
     public String discordPage(Model model, HttpServletRequest request) throws IOException, InterruptedException {
         hidden = !hidden;
 
-        System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-salut\"}"));
-
-
         ArrayList<Integer> rooms = new ArrayList<Integer>();
 
         rooms.add(0);
@@ -61,7 +59,22 @@ public class HomeController {
         model.addAttribute("rooms", rooms);
 
         int roomId = Integer.parseInt(request.getParameter("id"));
-        System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"" + roomId + "\"}"));
+
+        String roomID = "";
+        String userID = "";
+        if (roomId == 1) {
+            roomID = "784718151219937294";
+        }
+
+        if (roomId == 2) {
+            roomID = "784720436473888789";
+        }
+
+        if (myUser.equals("Cosmin")) {
+            userID = "203203790017527808";
+        }
+
+        System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + userID + " " + roomID + "\"}"));
 
         return mainPage(model);
     }

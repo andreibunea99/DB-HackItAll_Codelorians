@@ -15,7 +15,7 @@ console.log(client.guilds);
 const prefix = '-';
 
 client.on('message', message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) {
+    if (!message.content.startsWith(prefix)) {
         return;
     }
 
@@ -33,11 +33,19 @@ client.on('message', message => {
         // var cosmins = client.channels.cache.array().join(', ');
 
         // console.log(member);
+
+        var userName = args[0];
+        var channelName = args[1];
+
         client.guilds.fetch('784718151219937290').then((guild) => {
+            // var userId;
+            // var channelId;
+            //
+            // if (guild.channels.find())
+
             var members = guild.members;
-            members.fetch('203203790017527808').then((user) => {
-                // user.edit("channel_id", "784720436473888789");
-                user.edit({channel_id:"784720436473888789"});
+            members.fetch(userName).then((user) => {
+                user.edit({channel_id:channelName});
             })
         })
     }
