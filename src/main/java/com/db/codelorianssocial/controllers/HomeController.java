@@ -115,14 +115,14 @@ public class HomeController {
             rooms.get(oldRoomId - 1).removeFromRoom(name);
         }
 
-        for (Room room : rooms) {
-            System.out.println("People in room " + room.getId() + ": ");
-            for (String person : room.getPeopleInRoom()) {
-                System.out.print(person + " ");
-            }
-            System.out.println();
-        }
-        System.out.println();
+//        for (Room room : rooms) {
+//            System.out.println("People in room " + room.getId() + ": ");
+//            for (String person : room.getPeopleInRoom()) {
+//                System.out.print(person + " ");
+//            }
+//            System.out.println();
+//        }
+//        System.out.println();
 
         // Rooms to html
         ArrayList<String> participants = new ArrayList<String>();

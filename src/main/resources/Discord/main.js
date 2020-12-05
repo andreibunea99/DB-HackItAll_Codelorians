@@ -64,13 +64,13 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
             })
             request.end();
 
-            request = http.request({
-                port: 8080,
-                host: '192.168.100.52',
-                method: 'GET',
-                path: "/get-rooms-info?name=" + nick + "&newChannel=" + newUserChannel + "&oldChannel=" + oldUserChannel
-            })
-            request.end();
+            // request = http.request({
+            //     port: 8080,
+            //     host: '192.168.100.52',
+            //     method: 'GET',
+            //     path: "/get-rooms-info?name=" + nick + "&newChannel=" + newUserChannel + "&oldChannel=" + oldUserChannel
+            // })
+            // request.end();
         })
     }
 })
