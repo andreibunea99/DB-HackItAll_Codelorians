@@ -27,6 +27,9 @@ public class HomeController {
     String loginFailed = null;
     String registerFailed = null;
     String registerSuccess = null;
+    boolean isLogged = false;
+    boolean triedButton = false;
+    String accessFailed = null;
 
     RoomsService roomsService = new RoomsService();
 
@@ -45,6 +48,7 @@ public class HomeController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        model.addAttribute("access", accessFailed);
         model.addAttribute("isHidden", hidden);
         return "index";
     }
@@ -55,8 +59,13 @@ public class HomeController {
     public String discordPage(Model model, HttpServletRequest request) throws IOException, InterruptedException {
         hidden = !hidden;
 
-        // Rooms to html
         ArrayList<String> participants = new ArrayList<String>();
+        triedButton = true;
+
+        if (!isLogged) {
+            accessFailed = "Please login!";
+            return mainPage(model);
+        }
 
         participants.add("");
 
@@ -154,7 +163,8 @@ public class HomeController {
             loginFailed = "Userul nu exista!";
         } else {
             loginFailed = null;
-            page = "discord";
+            isLogged = true;
+            page = "index";
         }
 
         model.addAttribute("loginFlag", loginFailed);

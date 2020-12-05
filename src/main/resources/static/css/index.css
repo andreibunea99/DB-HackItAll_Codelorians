@@ -115,3 +115,16 @@ span {
     0% {opacity:0;}
     100% {opacity:1;}
 }
+
+.accessFailed {
+    position: absolute;
+    width: 20vw;
+    height: 5vh;
+    left: 40vw;
+    top: 18vh;
+    font-size: 120%;
+    padding-left: 1vw;
+    padding-top: 1vh;
+    color: darkred;
+    background-color: #d97c7c;
+}
