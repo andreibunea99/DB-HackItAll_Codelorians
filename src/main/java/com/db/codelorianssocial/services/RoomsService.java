@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RoomsService {
-    private List<Room> rooms = new ArrayList<>();
+    private ArrayList<Room> rooms = new ArrayList<>();
 
     public RoomsService() {
-        add(0);
-        add(1);
-        add(2);
+        rooms.add(new Room(1));
+        rooms.add(new Room(2));
     }
 
-    public List<Room> getRooms() {
+    public ArrayList<Room> getRooms() {
         return rooms;
     }
 

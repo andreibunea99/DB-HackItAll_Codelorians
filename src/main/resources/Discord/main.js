@@ -1,3 +1,4 @@
+var http = require('http');
 const Discord = require('discord.js');
 const fs = require('fs');
 const { on } = require('process');
@@ -51,23 +52,39 @@ client.on('message', message => {
     }
 });
 
-client.on('message', message => {
-    if (!message.content.startsWith(prefix) || message.author.bot) {
-        return;
-    }
+client.on('voiceStateUpdate', (oldMember, newMember) => {
+    let newUserChannel = newMember.channelID;
+    let oldUserChannel = oldMember.channelID;
 
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
+    var userID = newMember.member.id;
 
-    if (command === 'read') {
-        fs.readFile('command.txt', 'utf8', function (err,data) {
-            if (err) {
-              return console.log(err);
-            }
-            message.channel.send(data);
-          });
+    if (newUserChannel !== oldUserChannel) {
+        // var xmlHttp = new XMLHttpRequest();
+        // xmlHttp.open("GET", "localhost:8080/get-rooms-info?name=" + userID + "&channel=" + newUserChannel, false);
+        // xmlHttp.send(null);
+
+        // var client = http.createClient(8080, 'localhost');
+        // var request = client.request('GET', "/get-rooms-info?name=" + userID + "&channel=" + newUserChannel);
+
+        
+
+        var request = http.request({
+            port: 8080,
+            host: '127.0.0.1',
+            method: 'GET',
+            path: "/get-rooms-info?name=" + userID + "&newChannel=" + newUserChannel + "&oldChannel=" + oldUserChannel
+        })
+        request.end();
+
+
+        // var options = {
+        //     host: "127.0.0.1:8080",
+        //     path: "/get-rooms-info?name=" + userID + "&channel=" + newUserChannel
+        // };
+        //
+        // http.request(options).end();
     }
-});
+})
 
 
 client.login('Nzg0NzExMjg0MzE3ODgwMzIw.X8tRVQ.ivnVrrtSMEyeUNhgogx4yDhK5VY');

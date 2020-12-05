@@ -3,6 +3,7 @@ package com.db.codelorianssocial.controllers;
 import com.db.codelorianssocial.entity.RequestUser;
 import com.db.codelorianssocial.entity.User;
 import com.db.codelorianssocial.services.AuthService;
+import com.db.codelorianssocial.models.Room;
 import com.db.codelorianssocial.services.RoomsService;
 import com.db.codelorianssocial.utils.Constants;
 import com.db.codelorianssocial.utils.Requests;
@@ -99,9 +100,41 @@ public class HomeController {
     @GetMapping("/get-rooms-info")
     public String getRoomsInfo(Model model, HttpServletRequest request) {
         String name = request.getParameter("name");
-        String room = request.getParameter("channel");
+        String newRoom = request.getParameter("newChannel");
+        String oldRoom = request.getParameter("oldChannel");
 
-        System.out.println(name + " " + room);
+        int newRoomId = 0, oldRoomId = 0;
+        if (newRoom.equals("784718151219937294")) {
+            newRoomId = 1;
+        }
+        if (oldRoom.equals("784718151219937294")) {
+            oldRoomId = 1;
+        }
+        if (newRoom.equals("784720436473888789")) {
+            newRoomId = 2;
+        }
+        if (oldRoom.equals("784720436473888789")) {
+            oldRoomId = 2;
+        }
+
+        ArrayList<Room> rooms = roomsService.getRooms();
+        if (!newRoom.equals("null")) {
+            rooms.get(newRoomId - 1).addToRoom(name);
+        }
+        if (!oldRoom.equals("null")) {
+            rooms.get(oldRoomId - 1).removeFromRoom(name);
+        }
+
+        for (Room room : rooms) {
+            System.out.println("People in room " + room.getId() + ": ");
+            for (String person : room.getPeopleInRoom()) {
+                System.out.print(person + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+
+//        System.out.println(name + " " + newRoom + " " + oldRoom);
 
         return mainPage(model);
     }
