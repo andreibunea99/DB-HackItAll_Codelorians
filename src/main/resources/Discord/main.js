@@ -43,6 +43,66 @@ client.on('message', message => {
             }
         })
     }
+
+    if (command === 'mute') {
+        var userName = args[0];
+
+        client.guilds.fetch('784718151219937290').then((guild) => {
+            var members = guild.members;
+            for (const [key, value] of members.cache) {
+                if (value.nickname === userName) {
+                    members.fetch(value.id).then((user) => {
+                        user.edit({mute:1});
+                    })
+                }
+            }
+        })
+    }
+
+    if (command === 'unmute') {
+        var userName = args[0];
+
+        client.guilds.fetch('784718151219937290').then((guild) => {
+            var members = guild.members;
+            for (const [key, value] of members.cache) {
+                if (value.nickname === userName) {
+                    members.fetch(value.id).then((user) => {
+                        user.edit({mute:0});
+                    })
+                }
+            }
+        })
+    }
+
+    if (command === 'deafen') {
+        var userName = args[0];
+
+        client.guilds.fetch('784718151219937290').then((guild) => {
+            var members = guild.members;
+            for (const [key, value] of members.cache) {
+                if (value.nickname === userName) {
+                    members.fetch(value.id).then((user) => {
+                        user.edit({deaf:1});
+                    })
+                }
+            }
+        })
+    }
+
+    if (command === 'undeafen') {
+        var userName = args[0];
+
+        client.guilds.fetch('784718151219937290').then((guild) => {
+            var members = guild.members;
+            for (const [key, value] of members.cache) {
+                if (value.nickname === userName) {
+                    members.fetch(value.id).then((user) => {
+                        user.edit({deaf:0});
+                    })
+                }
+            }
+        })
+    }
 });
 
 client.on('voiceStateUpdate', (oldMember, newMember) => {

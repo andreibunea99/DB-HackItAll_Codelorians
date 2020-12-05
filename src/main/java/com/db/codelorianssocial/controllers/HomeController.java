@@ -7,6 +7,7 @@ import com.db.codelorianssocial.models.Room;
 import com.db.codelorianssocial.services.RoomsService;
 import com.db.codelorianssocial.utils.Constants;
 import com.db.codelorianssocial.utils.Requests;
+import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -87,10 +88,25 @@ public class HomeController {
         }
         int roomId = Integer.parseInt(request.getParameter("id"));
 
-        String roomID = Constants.roomIds[roomId];
+        if (roomId > 100) {
+            if (roomId == 101) {
+                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-mute " + myUser + "\"}");
+            }
+            if (roomId == 102) {
+                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-unmute " + myUser + "\"}");
+            }
+            if (roomId == 103) {
+                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-deafen " + myUser + "\"}");
+            }
+            if (roomId == 104) {
+                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-undeafen " + myUser + "\"}");
+            }
+        } else {
+            String roomID = Constants.roomIds[roomId];
 
-        if (roomId != roomsService.getUserRoom(myUser)) {
-            Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + myUser + " " + roomID + "\"}");
+            if (roomId != roomsService.getUserRoom(myUser)) {
+                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + myUser + " " + roomID + "\"}");
+            }
         }
 
         return "discord";

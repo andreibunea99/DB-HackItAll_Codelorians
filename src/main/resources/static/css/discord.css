@@ -196,3 +196,39 @@ body {
     top: 58.6vh;
     color: black;
 }
+
+.muteButton {
+    position: absolute;
+    width: 15.3vw;
+    height: 29vh;
+    left: 77vw;
+    top: 90vh;
+    color: black;
+}
+
+.unmuteButton {
+    position: absolute;
+    width: 15.3vw;
+    height: 29vh;
+    left: 80vw;
+    top: 90vh;
+    color: black;
+}
+
+.deafenButton {
+    position: absolute;
+    width: 15.3vw;
+    height: 29vh;
+    left: 77vw;
+    top: 94vh;
+    color: black;
+}
+
+.undeafenButton {
+    position: absolute;
+    width: 15.3vw;
+    height: 29vh;
+    left: 82vw;
+    top: 94vh;
+    color: black;
+}
