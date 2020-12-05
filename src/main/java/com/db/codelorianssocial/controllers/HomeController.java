@@ -142,7 +142,7 @@ public class HomeController {
 
         model.addAttribute("rooms", participants);
 
-        return "discord";
+        return getMap(model);
     }
 
     private AuthService authService = AuthService.getInstance();
@@ -170,6 +170,10 @@ public class HomeController {
         model.addAttribute("loginFlag", loginFailed);
 
         return page;
+    }
+
+    public String getMap(Model model) {
+        return "discord";
     }
 
     @RequestMapping(value="/register", method = RequestMethod.POST)
