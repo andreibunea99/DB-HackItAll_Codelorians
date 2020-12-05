@@ -1,0 +1,24 @@
+.authform {
+    position: relative;
+    width: 30vw;
+    left: 35vw;
+    /*color: #6200EE;*/
+    color: #03DAC6;
+}
+
+body {
+    background-color: #121212;
+}
+
+.authTitle {
+    position: relative;
+    color: #6200EE;
+    width: 50vw;
+    left: 3vw;
+    top: 1vh;
+    font-size: 300%;
+}
+
+.authButton {
+    color: #03DAC6;
+}

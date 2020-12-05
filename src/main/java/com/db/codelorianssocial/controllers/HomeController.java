@@ -38,4 +38,10 @@ public class HomeController {
 
         return mainPage(model);
     }
+
+    @GetMapping("/authentification")
+    public String auth(Model model) {
+
+        return "authentification";
+    }
 }
