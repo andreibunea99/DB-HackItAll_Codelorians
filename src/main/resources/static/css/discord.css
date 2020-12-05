@@ -1,13 +1,15 @@
 body {
     /*background-color: #1DA1F2;*/
     background-image: url("images/floorplan.jpg");
+    background-repeat: no-repeat;
+    background-size: 100vw 100vh;
 }
 
 .room1 {
     position: absolute;
     width: 50vw;
     height: 50vh;
-    background-color: antiquewhite;
+    /*background-color: antiquewhite;*/
     left: 0vw;
     top: 0vw;
     opacity: 0.2;
@@ -17,7 +19,7 @@ body {
     position: absolute;
     width: 50vw;
     height: 50vh;
-    background-color: burlywood;
+    /*background-color: burlywood;*/
     left: 50vw;
     top: 0vw;
     opacity: 0.2;
