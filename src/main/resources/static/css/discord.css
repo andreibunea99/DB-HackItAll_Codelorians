@@ -21,8 +21,9 @@ body {
     height: 28.8vh;
     left: 6vw;
     top: 6.1vh;
-    opacity: 0.7;
     display:table-caption;
+    color: black;
+    font-size: large;
 }
 
 .room2 {
@@ -41,7 +42,7 @@ body {
     height: 28.8vh;
     left: 25.5vw;
     top: 6.1vh;
-    opacity: 0.8;
+    color: black;
 }
 
 .room3 {
@@ -60,7 +61,7 @@ body {
     height: 34.4vh;
     left: 43.8vw;
     top: 6.1vh;
-    opacity: 0.8;
+    color: black;
 }
 
 .room4 {
@@ -77,10 +78,9 @@ body {
     position: absolute;
     width: 29.5vw;
     height: 18vh;
-    background-color: azure;
     left: 63vw;
     top: 6.1vh;
-    opacity: 0.8;
+    color: black;
 }
 
 .room5 {
@@ -99,7 +99,7 @@ body {
     height: 15.8vh;
     left: 63vw;
     top: 25vh;
-    opacity: 0.8;
+    color: black;
 }
 
 .room6 {
@@ -118,7 +118,7 @@ body {
     height: 29vh;
     left: 6vw;
     top: 58.6vh;
-    opacity: 0.8;
+    color: black;
 }
 
 .room7 {
@@ -131,13 +131,13 @@ body {
     opacity: 0.8;
 }
 
-.room7 {
+.room7PPl {
     position: absolute;
     width: 17.1vw;
     height: 29vh;
     left: 24.2vw;
     top: 58.6vh;
-    opacity: 0.8;
+    color: black;
 }
 
 .room8 {
@@ -156,7 +156,7 @@ body {
     height: 29vh;
     left: 42vw;
     top: 58.6vh;
-    opacity: 0.8;
+    color: black;
 }
 
 .room9 {
@@ -175,7 +175,7 @@ body {
     height: 29vh;
     left: 60.2vw;
     top: 58.55vh;
-    opacity: 0.8;
+    color: black;
 }
 
 .room10 {
@@ -194,5 +194,5 @@ body {
     height: 29vh;
     left: 77vw;
     top: 58.6vh;
-    opacity: 0.8;
+    color: black;
 }
