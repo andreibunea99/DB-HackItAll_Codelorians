@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const fs = require('fs');
 
 const client = new Discord.Client();
 
@@ -20,5 +21,12 @@ client.on('message', message => {
         message.channel.send('sex!');
     }
 });
+
+fs.readFile('/etc/hosts', 'utf8', function (err,data) {
+    if (err) {
+      return console.log(err);
+    }
+    console.log(data);
+  });
 
 client.login('Nzg0NzExMjg0MzE3ODgwMzIw.X8tRVQ.ivnVrrtSMEyeUNhgogx4yDhK5VY');
