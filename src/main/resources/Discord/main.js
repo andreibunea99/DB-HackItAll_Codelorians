@@ -25,6 +25,22 @@ client.on('message', message => {
     if (command === 'salut') {
         message.channel.send('sal!');
     }
+
+
+    if (command === 'move') {
+        // var member = message.author;
+
+        // var cosmins = client.channels.cache.array().join(', ');
+
+        // console.log(member);
+        client.guilds.fetch('784718151219937290').then((guild) => {
+            var members = guild.members;
+            members.fetch('203203790017527808').then((user) => {
+                // user.edit("channel_id", "784720436473888789");
+                user.edit({channel_id:"784720436473888789"});
+            })
+        })
+    }
 });
 
 client.on('message', message => {

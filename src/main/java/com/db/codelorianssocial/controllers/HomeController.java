@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -41,7 +42,7 @@ public class HomeController {
 
 
     @GetMapping("/codelorians-discord")
-    public String discordPage(Model model) throws IOException, InterruptedException {
+    public String discordPage(Model model, HttpServletRequest request) throws IOException, InterruptedException {
         hidden = !hidden;
 
         System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-salut\"}"));
@@ -57,8 +58,10 @@ public class HomeController {
 
         rooms.add(0);
 
-
         model.addAttribute("rooms", rooms);
+
+        int roomId = Integer.parseInt(request.getParameter("id"));
+        System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"" + roomId + "\"}"));
 
         return mainPage(model);
     }
