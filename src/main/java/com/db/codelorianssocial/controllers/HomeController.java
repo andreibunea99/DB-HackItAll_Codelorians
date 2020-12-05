@@ -44,13 +44,19 @@ public class HomeController {
     public String discordPage(Model model) throws IOException, InterruptedException {
         hidden = !hidden;
 
-        System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-sex\"}"));
+        System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-salut\"}"));
 
-        List<Integer> rooms = new ArrayList<Integer>();
+
+        ArrayList<Integer> rooms = new ArrayList<Integer>();
+
+        rooms.add(0);
 
         for (int i = 0; i < roomsService.getRooms().size(); ++i) {
             rooms.add(roomsService.getRooms().get(i).getId());
         }
+
+        rooms.add(0);
+
 
         model.addAttribute("rooms", rooms);
 

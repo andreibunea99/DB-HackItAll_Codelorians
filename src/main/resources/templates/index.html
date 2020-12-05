@@ -13,9 +13,31 @@
     <script type="text/javascript">
         function drawRooms() {
             var rooms = document.getElementById("rooms").value;
-            console.log(rooms);
+            var listRooms = rooms.split`,`.map(x=>+x);
+            var theRemovedElement = listRooms.shift();
+            var theRemovedElement = listRooms.pop();
+
+
+            console.log(listRooms);
         }
     </script>
+
+    <style>
+        .square {
+            height: 50px;
+            width: 50px;
+            background-color: #555;
+        }
+    </style>
+
+    <style>
+        .circle {
+            height: 50px;
+            width: 50px;
+            background-color: #555;
+            border-radius: 50%;
+        }
+    </style>
 
 </head>
 
@@ -26,7 +48,7 @@
     <h1 class="teamName">Presented by Codelorians</h1>
     <p class="description">"This application is designed for sad capitalists"</p>
 
-    <button type="button" th:onclick="|window.location.href='/codelorians-discord'|" class="btn btn-success" style="position: relative; left:42vw; width: 10vw; top: 40vh; font-size: 100%; background-color: darkgreen; font-family: 'Montserrat', sans-serif;">
+    <button type="button" th:onclick="|window.location.href='/codelorians-discord'|" class="btn btn-success" style="position: relative; left:42vw; width: 10vw; top: 15vh; font-size: 100%; background-color: darkgreen; font-family: 'Montserrat', sans-serif;">
         Ring for ROYAL RUMBLE</button>
 
     <input type="hidden" th:value="${isHidden}" name="blogId" />
@@ -39,6 +61,9 @@
 
 <input id="rooms" type="hidden" th:value="${rooms}"/>
 
+<div class="square" style="position: relative; left:42vw; top: 20vh;"></div>
+<div class="square" style="position: relative; left:42vw; width: 10vw; top: 25vh;"></div>
+<div class="circle"></div>
 
 </body>
 

@@ -10,6 +10,7 @@ public class RoomsService {
     public RoomsService() {
         add(0);
         add(1);
+        add(2);
     }
 
     public List<Room> getRooms() {
