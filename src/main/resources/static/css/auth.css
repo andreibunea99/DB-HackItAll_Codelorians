@@ -1,24 +1,65 @@
 .authform {
     position: relative;
+    /*display: inline-block;*/
     width: 30vw;
-    left: 35vw;
     /*color: #6200EE;*/
-    color: #03DAC6;
+    /*color: #03DAC6;*/
+    /*color: #018786*/
+    /*color: #BB86FC*/
+    color: #14171A;
+}
+
+.register {
+    left: 10vw;
+    top: 15vh;
+}
+
+.login {
+    position: absolute;
+    left: 60vw;
+    top: 33vh;
+}
+
+.typeoflogin {
+    font-size: 270%;
+    color: #14171A;
 }
 
 body {
-    background-color: #121212;
+    background-color: #1DA1F2;
 }
 
 .authTitle {
     position: relative;
-    color: #6200EE;
+    color: #F5F8FA;
     width: 50vw;
-    left: 3vw;
-    top: 1vh;
-    font-size: 300%;
+    left: 10vw;
+    top: 3vh;
+    font-size: 400%;
 }
 
 .authButton {
-    color: #03DAC6;
+    background-color: #14171A;
+    color: #F5F8FA;
+    width: 5vw;
+}
+
+.authButton:hover {
+    background-color: #657786;
+}
+
+.opacityControl {
+    /*opacity: 0.7%;*/
+    background-color: #F5F8FA;
+    color: #14171A;
+}
+
+.verticalLine {
+    position: absolute;
+    /*display: inline-block;*/
+    width: 0.1vw;
+    height: 80vh;
+    left: 50vw;
+    top: 10vh;
+    background-color: #14171A;
 }
