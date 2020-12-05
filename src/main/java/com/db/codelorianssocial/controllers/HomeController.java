@@ -42,6 +42,7 @@ public class HomeController {
     }
 
 
+
     @GetMapping("/codelorians-discord")
     public String discordPage(Model model, HttpServletRequest request) throws IOException, InterruptedException {
         hidden = !hidden;
@@ -75,6 +76,16 @@ public class HomeController {
         }
 
         System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + userID + " " + roomID + "\"}"));
+
+        return mainPage(model);
+    }
+
+    @GetMapping("/get-rooms-info")
+    public String getRoomsInfo(Model model, HttpServletRequest request) {
+        String name = request.getParameter("name");
+        String room = request.getParameter("channel");
+
+        System.out.println(name + " " + room);
 
         return mainPage(model);
     }
