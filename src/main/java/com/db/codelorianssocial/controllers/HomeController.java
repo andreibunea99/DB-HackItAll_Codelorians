@@ -72,6 +72,9 @@ public class HomeController {
 
         model.addAttribute("rooms", rooms);
 
+        if (request.getParameter("id") == null) {
+            return mainPage(model);
+        }
         int roomId = Integer.parseInt(request.getParameter("id"));
 
         String roomID = "";
