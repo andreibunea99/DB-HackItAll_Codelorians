@@ -167,6 +167,8 @@ public class HomeController {
             page = "index";
         }
 
+        myUser = user.getId();
+
         model.addAttribute("loginFlag", loginFailed);
 
         return page;
