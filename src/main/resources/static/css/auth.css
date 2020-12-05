@@ -63,3 +63,42 @@ body {
     top: 10vh;
     background-color: #14171A;
 }
+
+.alertRegister {
+    position: absolute;
+    width: 30vw;
+    height: 5vh;
+    left: 10vw;
+    top: 18vh;
+    font-size: 120%;
+    padding-left: 1vw;
+    padding-top: 1vh;
+    color: darkred;
+    background-color: #d97c7c;
+}
+
+.alertRegisterSuccess {
+    position: absolute;
+    width: 30vw;
+    height: 5vh;
+    left: 10vw;
+    top: 18vh;
+    font-size: 120%;
+    padding-left: 1vw;
+    padding-top: 1vh;
+    color: #097036;
+    background-color: #68de9b;
+}
+
+.alertLogin {
+    position: absolute;
+    width: 30vw;
+    height: 5vh;
+    left: 60vw;
+    top: 25vh;
+    font-size: 120%;
+    padding-left: 1vw;
+    padding-top: 1vh;
+    color: darkred;
+    background-color: #d97c7c;
+}

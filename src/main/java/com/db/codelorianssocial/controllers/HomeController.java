@@ -24,6 +24,9 @@ public class HomeController {
 
     boolean hidden = true;
     String myUser = "Adi";
+    String loginFailed = null;
+    String registerFailed = null;
+    String registerSuccess = null;
 
     RoomsService roomsService = new RoomsService();
 
@@ -122,13 +125,49 @@ public class HomeController {
         return "discord";
     }
 
-    private AuthService authService;
+    private AuthService authService = AuthService.getInstance();
 
-    @RequestMapping(value="/authentification", method = RequestMethod.POST)
+//    @RequestMapping(value="/authentification", method = RequestMethod.POST)
+//    public String login(@ModelAttribute("user")RequestUser user, Model model) {
+//        System.out.println(user.getId() + " " + user.getPassword());
+//
+//        return "discord";
+//    }
+
+    @RequestMapping(value="/login", method = RequestMethod.POST)
     public String login(@ModelAttribute("user")RequestUser user, Model model) {
-        System.out.println(user.getId() + " " + user.getPassword());
+        String page = "authentification";
 
-        return "discord";
+        System.out.println(user.getId() + " " + user.getPassword());
+        if (!authService.login(user)) {
+            loginFailed = "Userul nu exista!";
+        } else {
+            loginFailed = null;
+            page = "discord";
+        }
+
+        model.addAttribute("loginFlag", loginFailed);
+
+        return page;
+    }
+
+    @RequestMapping(value="/register", method = RequestMethod.POST)
+    public String register(@ModelAttribute("user")User user, Model model) {
+
+        if (!authService.register(user)) {
+            registerFailed = "Userul deja exista!";
+            registerSuccess = null;
+        } else {
+            registerFailed = null;
+            registerSuccess = "Utilizatorul a fost creat cu success!";
+        }
+
+        authService.showUsers();
+
+        model.addAttribute("registerFlag", registerFailed);
+        model.addAttribute("registerFlagSuccess", registerSuccess);
+
+        return "authentification";
     }
 
 

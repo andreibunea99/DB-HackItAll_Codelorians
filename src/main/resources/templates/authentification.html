@@ -17,23 +17,35 @@
 <div class="homeBody">
     <h1 class="display-1 authTitle">Codelorians Social</h1>
 
-    <form class="authform register">
+    <div th:if="${registerFlag}" class="alertRegister">
+        <p th:text="${registerFlag}"></p>
+    </div>
+
+    <div th:if="${registerFlagSuccess}" class="alertRegisterSuccess">
+        <p th:text="${registerFlagSuccess}"></p>
+    </div>
+
+    <div th:if="${loginFlag}" class="alertLogin">
+        <p th:text="${loginFlag}"></p>
+    </div>
+
+    <form class="authform register" action="#" th:action="@{/register}" th:object="${user}" method="post">
         <h1 class="display-4 typeoflogin">Register</h1>
         <div class="form-group">
             <label for="inputId">User ID</label>
-            <input type="text" class="form-control opacityControl" id="inputId" aria-describedby="emailHelp" name="userid">
+            <input type="text" class="form-control opacityControl" id="inputId" aria-describedby="emailHelp" name="id">
         </div>
         <div class="form-group">
             <label for="inputEmail">Email Address</label>
-            <input type="email" class="form-control opacityControl" id="inputEmail" aria-describedby="emailHelp" name="useremail">
+            <input type="email" class="form-control opacityControl" id="inputEmail" aria-describedby="emailHelp" name="email">
         </div>
         <div class="form-group">
             <label for="inputDiscord">Discord ID</label>
-            <input type="text" class="form-control opacityControl" id="inputDiscord" aria-describedby="emailHelp" name="userdiscord">
+            <input type="text" class="form-control opacityControl" id="inputDiscord" aria-describedby="emailHelp" name="discord">
         </div>
         <div class="form-group">
             <label for="inputPassword1">Password</label>
-            <input type="password" class="form-control opacityControl" id="inputPassword1" name="userpass">
+            <input type="password" class="form-control opacityControl" id="inputPassword1" name="password">
         </div>
         <div class="form-group form-check" style="color: #FFFFFF">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -44,7 +56,7 @@
 
     <div class="verticalLine"></div>
 
-    <form class="authform login" action="#" th:action="@{/authentification}" th:object="${user}" method="post">
+    <form class="authform login" action="#" th:action="@{/login}" th:object="${user}" method="post">
         <h1 class="display-4 typeoflogin">Login</h1>
         <div class="form-group">
             <label for="loginId">User ID</label>
