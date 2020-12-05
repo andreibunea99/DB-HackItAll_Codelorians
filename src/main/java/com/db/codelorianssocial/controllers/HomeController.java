@@ -52,39 +52,29 @@ public class HomeController {
     public String discordPage(Model model, HttpServletRequest request) throws IOException, InterruptedException {
         hidden = !hidden;
 
-        ArrayList<Integer> rooms = new ArrayList<Integer>();
+        ArrayList<ArrayList<String>> participants = new ArrayList<ArrayList<String>>();
 
-        rooms.add(0);
+        participants.add(new ArrayList<>());
 
         for (int i = 0; i < roomsService.getRooms().size(); ++i) {
-            rooms.add(roomsService.getRooms().get(i).getId());
+            participants.add(roomsService.getRooms().get(i).getPeopleInRoom());
         }
 
-        rooms.add(0);
+        participants.add(new ArrayList<>());
 
-        model.addAttribute("rooms", rooms);
+        model.addAttribute("rooms", participants);
 
         if (request.getParameter("id") == null) {
             return "discord";
         }
         int roomId = Integer.parseInt(request.getParameter("id"));
 
-        String roomID = "";
-        if (roomId == 1) {
-            roomID = "784718151219937294";
+        String roomID = Constants.roomIds[roomId];
+
+        if (roomId != roomsService.getUserRoom(myUser)) {
+            Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + myUser + " " + roomID + "\"}");
         }
 
-        if (roomId == 2) {
-            roomID = "784720436473888789";
-        }
-
-        Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + myUser + " " + roomID + "\"}");
-
-        return "discord";
-    }
-
-    @GetMapping("/discord-map")
-    public String getMap(Model model) {
         return "discord";
     }
 
@@ -94,19 +84,10 @@ public class HomeController {
         String newRoom = request.getParameter("newChannel");
         String oldRoom = request.getParameter("oldChannel");
 
-        int newRoomId = 0, oldRoomId = 0;
-        if (newRoom.equals("784718151219937294")) {
-            newRoomId = 1;
-        }
-        if (oldRoom.equals("784718151219937294")) {
-            oldRoomId = 1;
-        }
-        if (newRoom.equals("784720436473888789")) {
-            newRoomId = 2;
-        }
-        if (oldRoom.equals("784720436473888789")) {
-            oldRoomId = 2;
-        }
+        int newRoomId, oldRoomId;
+
+        oldRoomId = Constants.getIdOfRoom(oldRoom);
+        newRoomId = Constants.getIdOfRoom(newRoom);
 
         ArrayList<Room> rooms = roomsService.getRooms();
         if (!newRoom.equals("null")) {
@@ -124,26 +105,24 @@ public class HomeController {
             System.out.println();
         }
         System.out.println();
+
+        // Rooms to html
+        ArrayList<ArrayList<String>> participants = new ArrayList<ArrayList<String>>();
+
+        participants.add(new ArrayList<>());
+
+        for (int i = 0; i < roomsService.getRooms().size(); ++i) {
+            participants.add(roomsService.getRooms().get(i).getPeopleInRoom());
+        }
+
+        participants.add(new ArrayList<>());
+
+        model.addAttribute("rooms", participants);
+
         return "discord";
     }
 
     private AuthService authService;
-
-//    @GetMapping("/auth-login")
-//    public String login(Model model) {
-//        RequestUser user = new RequestUser();
-//        user.setId("sdas");
-//        model.addAttribute("user", user);
-//        return "authentification";
-//    }
-//
-//    @PostMapping("/auth-login")
-//    public String login(@ModelAttribute(name="user") RequestUser user, Model model) {
-//        model.addAttribute("user", user);
-//        System.out.println(user);
-//        System.out.println(user.getId() + " " + user.getPassword());
-//        return "discord";
-//    }
 
     @RequestMapping(value="/authentification", method = RequestMethod.POST)
     public String login(@ModelAttribute("user")RequestUser user, Model model) {

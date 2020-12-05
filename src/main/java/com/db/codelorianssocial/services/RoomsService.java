@@ -10,6 +10,15 @@ public class RoomsService {
     public RoomsService() {
         rooms.add(new Room(1));
         rooms.add(new Room(2));
+        rooms.add(new Room(3));
+        rooms.add(new Room(4));
+        rooms.add(new Room(5));
+        rooms.add(new Room(6));
+        rooms.add(new Room(7));
+        rooms.add(new Room(8));
+        rooms.add(new Room(9));
+        rooms.add(new Room(10));
+        rooms.add(new Room(11));
     }
 
     public ArrayList<Room> getRooms() {
@@ -18,5 +27,16 @@ public class RoomsService {
 
     public void add(int id) {
         rooms.add(new Room(id));
+    }
+
+    public int getUserRoom(String username) {
+        for (int i = 0; i < rooms.size(); ++i) {
+            for (String name : rooms.get(i).getPeopleInRoom()) {
+                if (name.equals(username)) {
+                    return rooms.get(i).getId();
+                }
+            }
+        }
+        return 0;
     }
 }
