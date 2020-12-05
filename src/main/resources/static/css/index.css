@@ -18,6 +18,32 @@ body {
     top: 80vh;
 }
 
+.gologin {
+    position: absolute;
+    left:85vw;
+    width: 10vw;
+    height: 5vh;
+    border-color: #14171A;
+    top: 3vh;
+    font-size: 100%;
+    background-color: #14171A;
+    color: #F5F8FA;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.gologin:hover {
+    background-color: #F5F8FA;
+    border-color: #F5F8FA;
+    color: #14171A;
+    font-size: 120%;
+}
+
+.gologin:active {
+    background-color: #F5F8FA;
+    border-color: #F5F8FA;
+    color: #14171A;
+}
+
 .gomap {
     position: relative;
     left:40vw;
@@ -32,14 +58,15 @@ body {
 }
 
 .gomap:hover {
-    background-color: #657786;
-    border-color: #657786;
+    background-color: #F5F8FA;
+    border-color: #F5F8FA;
     color: #14171A;
+    font-size: 140%;
 }
 
 .gomap:active {
-    background-color: #657786;
-    border-color: #657786;
+    background-color: #F5F8FA;
+    border-color: #F5F8FA;
     color: #14171A;
 }
 
