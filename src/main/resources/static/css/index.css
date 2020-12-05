@@ -1,0 +1,44 @@
+body {
+    background-color: #1DA1F2;
+}
+
+.titleText {
+    position: relative;
+    color: #F5F8FA;
+    width: 50vw;
+    left: 10vw;
+    top: 3vh;
+    font-size: 400%;
+}
+
+.teamName {
+    position: absolute;
+    color: #F5F8FA;
+    left: 60vw;
+    top: 80vh;
+}
+
+.gomap {
+    position: relative;
+    left:40vw;
+    width: 20vw;
+    height: 8vh;
+    border-color: #14171A;
+    top: 45vh;
+    font-size: 120%;
+    background-color: #14171A;
+    color: #F5F8FA;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.gomap:hover {
+    background-color: #657786;
+    border-color: #657786;
+    color: #14171A;
+}
+
+.gomap:active {
+    background-color: #657786;
+    border-color: #657786;
+    color: #14171A;
+}

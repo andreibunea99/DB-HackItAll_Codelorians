@@ -49,7 +49,7 @@ public class HomeController {
 
 
     @GetMapping("/codelorians-discord")
-    public String discordPage(Model model, HttpServletRequest request) throws IOException, InterruptedException {
+    public String discordPage(Model model, HttpServletRequest request) {
         hidden = !hidden;
 
         try {
@@ -74,7 +74,7 @@ public class HomeController {
         model.addAttribute("rooms", rooms);
 
         if (request.getParameter("id") == null) {
-            return mainPage(model);
+            return "discord";
         }
         int roomId = Integer.parseInt(request.getParameter("id"));
 
@@ -92,9 +92,20 @@ public class HomeController {
             userID = "203203790017527808";
         }
 
-        System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + userID + " " + roomID + "\"}"));
+        try {
+            System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + userID + " " + roomID + "\"}"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-        return mainPage(model);
+        return "discord";
+    }
+
+    @GetMapping("/discord-map")
+    public String getMap(Model model) {
+        return "discord";
     }
 
     @GetMapping("/get-rooms-info")
@@ -136,7 +147,7 @@ public class HomeController {
 
 //        System.out.println(name + " " + newRoom + " " + oldRoom);
 
-        return mainPage(model);
+        return "discord";
     }
 
     private AuthService authService;
