@@ -22,8 +22,8 @@ client.on('message', message => {
     const args = message.content.slice(prefix.length).split(/ +/);
     const command = args.shift().toLowerCase();
 
-    if (command === 'sex') {
-        message.channel.send('sex!');
+    if (command === 'salut') {
+        message.channel.send('sal!');
     }
 });
 

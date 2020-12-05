@@ -10,6 +10,13 @@
     <link th:href="@{/styles/index.css}" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Raleway:ital,wght@1,300&display=swap" rel="stylesheet">
 
+    <script type="text/javascript">
+        function drawRooms() {
+            var rooms = document.getElementById("rooms").value;
+            console.log(rooms);
+        }
+    </script>
+
 </head>
 
 <body>
@@ -29,6 +36,10 @@
         <span th:unless="${isHidden}">Offline</span>
     </td>
 </div>
+
+<input id="rooms" type="hidden" th:value="${rooms}"/>
+
+
 </body>
 
 </html>

@@ -1,5 +1,8 @@
 package com.db.codelorianssocial.controllers;
 
+import com.db.codelorianssocial.services.RoomsService;
+import com.db.codelorianssocial.utils.Constants;
+import com.db.codelorianssocial.utils.Requests;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,11 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class HomeController {
 
     boolean hidden = true;
+
+    RoomsService roomsService = new RoomsService();
 
     public void writeInCommand() throws IOException {
         String str = "Hello";
@@ -32,9 +39,20 @@ public class HomeController {
         return "index";
     }
 
+
     @GetMapping("/codelorians-discord")
-    public String discordPage(Model model) {
+    public String discordPage(Model model) throws IOException, InterruptedException {
         hidden = !hidden;
+
+        System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-sex\"}"));
+
+        List<Integer> rooms = new ArrayList<Integer>();
+
+        for (int i = 0; i < roomsService.getRooms().size(); ++i) {
+            rooms.add(roomsService.getRooms().get(i).getId());
+        }
+
+        model.addAttribute("rooms", rooms);
 
         return mainPage(model);
     }
