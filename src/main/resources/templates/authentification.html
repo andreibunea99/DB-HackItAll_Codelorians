@@ -22,17 +22,14 @@
         <div class="form-group">
             <label for="inputId">User ID</label>
             <input type="text" class="form-control opacityControl" id="inputId" aria-describedby="emailHelp" name="userid">
-<!--            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
         </div>
         <div class="form-group">
             <label for="inputEmail">Email Address</label>
             <input type="email" class="form-control opacityControl" id="inputEmail" aria-describedby="emailHelp" name="useremail">
-<!--            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
         </div>
         <div class="form-group">
             <label for="inputDiscord">Discord ID</label>
             <input type="text" class="form-control opacityControl" id="inputDiscord" aria-describedby="emailHelp" name="userdiscord">
-<!--            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
         </div>
         <div class="form-group">
             <label for="inputPassword1">Password</label>
@@ -47,16 +44,15 @@
 
     <div class="verticalLine"></div>
 
-    <form class="authform login" action="#" th:action="@{/auth-login}" th:object="${user}" method="post">
+    <form class="authform login" action="#" th:action="@{/authentification}" th:object="${user}" method="post">
         <h1 class="display-4 typeoflogin">Login</h1>
         <div class="form-group">
             <label for="loginId">User ID</label>
-            <input type="text" class="form-control opacityControl" id="loginId" >
-            <!--            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
+            <input type="text" class="form-control opacityControl" id="loginId" name="id">
         </div>
         <div class="form-group">
             <label for="loginPassword">Password</label>
-            <input type="password" class="form-control opacityControl" id="loginPassword">
+            <input type="password" class="form-control opacityControl" id="loginPassword" name="password">
         </div>
         <button type="submit" class="btn btn-primary authButton">Login</button>
     </form>

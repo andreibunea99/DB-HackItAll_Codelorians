@@ -129,18 +129,27 @@ public class HomeController {
 
     private AuthService authService;
 
-    @GetMapping("/auth-login")
-    public String login(Model model) {
-        RequestUser user = new RequestUser();
-        model.addAttribute("user", user);
-        return "authentification";
-    }
+//    @GetMapping("/auth-login")
+//    public String login(Model model) {
+//        RequestUser user = new RequestUser();
+//        user.setId("sdas");
+//        model.addAttribute("user", user);
+//        return "authentification";
+//    }
+//
+//    @PostMapping("/auth-login")
+//    public String login(@ModelAttribute(name="user") RequestUser user, Model model) {
+//        model.addAttribute("user", user);
+//        System.out.println(user);
+//        System.out.println(user.getId() + " " + user.getPassword());
+//        return "discord";
+//    }
 
-    @PostMapping("/auth-login")
-    public String login(@ModelAttribute RequestUser user, Model model) {
-        model.addAttribute("user", user);
+    @RequestMapping(value="/authentification", method = RequestMethod.POST)
+    public String login(@ModelAttribute("user")RequestUser user, Model model) {
         System.out.println(user.getId() + " " + user.getPassword());
-        return "authentification";
+
+        return "discord";
     }
 
 
