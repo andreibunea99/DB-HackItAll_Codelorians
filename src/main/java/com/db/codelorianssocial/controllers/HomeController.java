@@ -55,15 +55,21 @@ public class HomeController {
     public String discordPage(Model model, HttpServletRequest request) throws IOException, InterruptedException {
         hidden = !hidden;
 
-        ArrayList<ArrayList<String>> participants = new ArrayList<ArrayList<String>>();
+        // Rooms to html
+        ArrayList<String> participants = new ArrayList<String>();
 
-        participants.add(new ArrayList<>());
+        participants.add("");
 
         for (int i = 0; i < roomsService.getRooms().size(); ++i) {
-            participants.add(roomsService.getRooms().get(i).getPeopleInRoom());
+            StringBuilder ret = new StringBuilder();
+            ArrayList<String> temp = roomsService.getRooms().get(i).getPeopleInRoom();
+            for (String s : temp) {
+                ret.append(s).append("   ");
+            }
+            participants.add(ret.toString());
         }
 
-        participants.add(new ArrayList<>());
+        participants.add("");
 
         model.addAttribute("rooms", participants);
 
@@ -110,15 +116,20 @@ public class HomeController {
         System.out.println();
 
         // Rooms to html
-        ArrayList<ArrayList<String>> participants = new ArrayList<ArrayList<String>>();
+        ArrayList<String> participants = new ArrayList<String>();
 
-        participants.add(new ArrayList<>());
+        participants.add("");
 
         for (int i = 0; i < roomsService.getRooms().size(); ++i) {
-            participants.add(roomsService.getRooms().get(i).getPeopleInRoom());
+            String ret = "";
+            ArrayList<String> temp = roomsService.getRooms().get(i).getPeopleInRoom();
+            for (String s : temp) {
+                ret += s + "   ";
+            }
+            participants.add(ret);
         }
 
-        participants.add(new ArrayList<>());
+        participants.add("");
 
         model.addAttribute("rooms", participants);
 

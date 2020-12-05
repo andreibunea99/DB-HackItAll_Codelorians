@@ -15,6 +15,16 @@ body {
     opacity: 0.7;
 }
 
+.room1PPl {
+    position: absolute;
+    width: 18.8vw;
+    height: 28.8vh;
+    left: 6vw;
+    top: 6.1vh;
+    opacity: 0.7;
+    display:table-caption;
+}
+
 .room2 {
     position: absolute;
     width: 17.8vw;
