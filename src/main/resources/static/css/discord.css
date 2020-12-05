@@ -1,26 +1,106 @@
 body {
     /*background-color: #1DA1F2;*/
-    background-image: url("images/floorplan.jpg");
+    background-image: url("images/floorplan-v2.jpg");
     background-repeat: no-repeat;
     background-size: 100vw 100vh;
 }
 
 .room1 {
     position: absolute;
-    width: 50vw;
-    height: 50vh;
-    /*background-color: antiquewhite;*/
-    left: 0vw;
-    top: 0vw;
-    opacity: 0.2;
+    width: 18.8vw;
+    height: 28.8vh;
+    background-color: antiquewhite;
+    left: 6vw;
+    top: 6.1vh;
+    opacity: 0.7;
 }
 
 .room2 {
     position: absolute;
-    width: 50vw;
-    height: 50vh;
-    /*background-color: burlywood;*/
-    left: 50vw;
-    top: 0vw;
-    opacity: 0.2;
+    width: 17.8vw;
+    height: 28.8vh;
+    background-color: burlywood;
+    left: 25.5vw;
+    top: 6.1vh;
+    opacity: 0.8;
+}
+
+.room3 {
+    position: absolute;
+    width: 18.6vw;
+    height: 34.4vh;
+    background-color: aquamarine;
+    left: 43.8vw;
+    top: 6.1vh;
+    opacity: 0.8;
+}
+
+.room4 {
+    position: absolute;
+    width: 29.5vw;
+    height: 18vh;
+    background-color: azure;
+    left: 63vw;
+    top: 6.1vh;
+    opacity: 0.8;
+}
+
+.room5 {
+    position: absolute;
+    width: 29.5vw;
+    height: 15.8vh;
+    background-color: cadetblue;
+    left: 63vw;
+    top: 25vh;
+    opacity: 0.8;
+}
+
+.room6 {
+    position: absolute;
+    width: 17.5vw;
+    height: 29vh;
+    background-color: pink;
+    left: 6vw;
+    top: 58.6vh;
+    opacity: 0.8;
+}
+
+.room7 {
+    position: absolute;
+    width: 17.1vw;
+    height: 29vh;
+    background-color: coral;
+    left: 24.2vw;
+    top: 58.6vh;
+    opacity: 0.8;
+}
+
+.room8 {
+    position: absolute;
+    width: 17.5vw;
+    height: 29vh;
+    background-color: darkkhaki;
+    left: 42vw;
+    top: 58.6vh;
+    opacity: 0.8;
+}
+
+.room9 {
+    position: absolute;
+    width: 16.1vw;
+    height: 29vh;
+    background-color: darkslategrey;
+    left: 60.2vw;
+    top: 58.55vh;
+    opacity: 0.8;
+}
+
+.room10 {
+    position: absolute;
+    width: 15.3vw;
+    height: 29vh;
+    background-color: lightgreen;
+    left: 77vw;
+    top: 58.6vh;
+    opacity: 0.8;
 }

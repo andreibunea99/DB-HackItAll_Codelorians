@@ -44,6 +44,10 @@ body {
     color: #14171A;
 }
 
+span {
+    color: #14171A;
+}
+
 .gomap {
     position: relative;
     left:40vw;
