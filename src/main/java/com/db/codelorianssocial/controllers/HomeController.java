@@ -1,11 +1,15 @@
 package com.db.codelorianssocial.controllers;
 
+import com.db.codelorianssocial.entity.RequestUser;
+import com.db.codelorianssocial.entity.User;
+import com.db.codelorianssocial.services.AuthService;
 import com.db.codelorianssocial.services.RoomsService;
 import com.db.codelorianssocial.utils.Constants;
 import com.db.codelorianssocial.utils.Requests;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.BufferedWriter;
@@ -46,6 +50,15 @@ public class HomeController {
     @GetMapping("/codelorians-discord")
     public String discordPage(Model model, HttpServletRequest request) throws IOException, InterruptedException {
         hidden = !hidden;
+
+        try {
+            System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-salut\"}"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
         ArrayList<Integer> rooms = new ArrayList<Integer>();
 
@@ -89,6 +102,24 @@ public class HomeController {
 
         return mainPage(model);
     }
+
+    private AuthService authService;
+
+    @GetMapping("/auth-login")
+    public String login(Model model) {
+        RequestUser user = new RequestUser();
+        model.addAttribute("user", user);
+        return "authentification";
+    }
+
+    @PostMapping("/auth-login")
+    public String login(@ModelAttribute RequestUser user, Model model) {
+        model.addAttribute("user", user);
+        System.out.println(user.getId() + " " + user.getPassword());
+        return "authentification";
+    }
+
+
 
     @GetMapping("/authentification")
     public String auth(Model model) {

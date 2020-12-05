@@ -21,22 +21,22 @@
         <h1 class="display-4 typeoflogin">Register</h1>
         <div class="form-group">
             <label for="inputId">User ID</label>
-            <input type="email" class="form-control opacityControl" id="inputId" aria-describedby="emailHelp">
+            <input type="text" class="form-control opacityControl" id="inputId" aria-describedby="emailHelp" name="userid">
 <!--            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
         </div>
         <div class="form-group">
             <label for="inputEmail">Email Address</label>
-            <input type="email" class="form-control opacityControl" id="inputEmail" aria-describedby="emailHelp">
+            <input type="email" class="form-control opacityControl" id="inputEmail" aria-describedby="emailHelp" name="useremail">
 <!--            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
         </div>
         <div class="form-group">
             <label for="inputDiscord">Discord ID</label>
-            <input type="email" class="form-control opacityControl" id="inputDiscord" aria-describedby="emailHelp">
+            <input type="text" class="form-control opacityControl" id="inputDiscord" aria-describedby="emailHelp" name="userdiscord">
 <!--            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
         </div>
         <div class="form-group">
             <label for="inputPassword1">Password</label>
-            <input type="password" class="form-control opacityControl" id="inputPassword1">
+            <input type="password" class="form-control opacityControl" id="inputPassword1" name="userpass">
         </div>
         <div class="form-group form-check" style="color: #FFFFFF">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -47,11 +47,11 @@
 
     <div class="verticalLine"></div>
 
-    <form class="authform login">
+    <form class="authform login" action="#" th:action="@{/auth-login}" th:object="${user}" method="post">
         <h1 class="display-4 typeoflogin">Login</h1>
         <div class="form-group">
             <label for="loginId">User ID</label>
-            <input type="email" class="form-control opacityControl" id="loginId" aria-describedby="emailHelp">
+            <input type="text" class="form-control opacityControl" id="loginId" >
             <!--            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
         </div>
         <div class="form-group">
