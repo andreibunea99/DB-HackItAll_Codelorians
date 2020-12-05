@@ -27,27 +27,20 @@ client.on('message', message => {
         message.channel.send('sal!');
     }
 
-
     if (command === 'move') {
-        // var member = message.author;
-
-        // var cosmins = client.channels.cache.array().join(', ');
-
-        // console.log(member);
 
         var userName = args[0];
         var channelName = args[1];
 
         client.guilds.fetch('784718151219937290').then((guild) => {
-            // var userId;
-            // var channelId;
-            //
-            // if (guild.channels.find())
-
             var members = guild.members;
-            members.fetch(userName).then((user) => {
-                user.edit({channel_id:channelName});
-            })
+            for (const [key, value] of members.cache) {
+                if (value.nickname === userName) {
+                    members.fetch(value.id).then((user) => {
+                        user.edit({channel_id:channelName});
+                    })
+                }
+            }
         })
     }
 });
@@ -59,30 +52,18 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
     var userID = newMember.member.id;
 
     if (newUserChannel !== oldUserChannel) {
-        // var xmlHttp = new XMLHttpRequest();
-        // xmlHttp.open("GET", "localhost:8080/get-rooms-info?name=" + userID + "&channel=" + newUserChannel, false);
-        // xmlHttp.send(null);
+        var nick;
+        oldMember.guild.members.fetch(userID).then((user) => {
+            nick = user.nickname;
 
-        // var client = http.createClient(8080, 'localhost');
-        // var request = client.request('GET', "/get-rooms-info?name=" + userID + "&channel=" + newUserChannel);
-
-        
-
-        var request = http.request({
-            port: 8080,
-            host: '127.0.0.1',
-            method: 'GET',
-            path: "/get-rooms-info?name=" + userID + "&newChannel=" + newUserChannel + "&oldChannel=" + oldUserChannel
+            var request = http.request({
+                port: 8080,
+                host: '127.0.0.1',
+                method: 'GET',
+                path: "/get-rooms-info?name=" + nick + "&newChannel=" + newUserChannel + "&oldChannel=" + oldUserChannel
+            })
+            request.end();
         })
-        request.end();
-
-
-        // var options = {
-        //     host: "127.0.0.1:8080",
-        //     path: "/get-rooms-info?name=" + userID + "&channel=" + newUserChannel
-        // };
-        //
-        // http.request(options).end();
     }
 })
 

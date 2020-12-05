@@ -23,7 +23,7 @@ import java.util.List;
 public class HomeController {
 
     boolean hidden = true;
-    String myUser = "Cosmin";
+    String myUser = "Adi";
 
     RoomsService roomsService = new RoomsService();
 
@@ -49,17 +49,8 @@ public class HomeController {
 
 
     @GetMapping("/codelorians-discord")
-    public String discordPage(Model model, HttpServletRequest request) {
+    public String discordPage(Model model, HttpServletRequest request) throws IOException, InterruptedException {
         hidden = !hidden;
-
-        try {
-            System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-salut\"}"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
 
         ArrayList<Integer> rooms = new ArrayList<Integer>();
 
@@ -79,7 +70,6 @@ public class HomeController {
         int roomId = Integer.parseInt(request.getParameter("id"));
 
         String roomID = "";
-        String userID = "";
         if (roomId == 1) {
             roomID = "784718151219937294";
         }
@@ -88,17 +78,7 @@ public class HomeController {
             roomID = "784720436473888789";
         }
 
-        if (myUser.equals("Cosmin")) {
-            userID = "203203790017527808";
-        }
-
-        try {
-            System.out.println(Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + userID + " " + roomID + "\"}"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + myUser + " " + roomID + "\"}");
 
         return "discord";
     }
@@ -144,9 +124,6 @@ public class HomeController {
             System.out.println();
         }
         System.out.println();
-
-//        System.out.println(name + " " + newRoom + " " + oldRoom);
-
         return "discord";
     }
 

@@ -10,8 +10,6 @@ public class Requests {
     public static String sendMessage(String URL, String message) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
-        System.out.println(message);
-
         HttpRequest request = HttpRequest.newBuilder(URI.create(URL))
                 .header("content-type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(message))
