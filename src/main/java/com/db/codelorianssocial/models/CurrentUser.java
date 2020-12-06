@@ -5,7 +5,8 @@ import java.util.Map;
 
 public class CurrentUser {
     private String name;
-    private Map<String, Integer> timeInRooms = new HashMap<>();
+    private String currentRoom;
+    private Map<String, Long> timeInRooms = new HashMap<>();
 
     public CurrentUser(String name) {
         this.name = name;
@@ -19,11 +20,24 @@ public class CurrentUser {
         this.name = name;
     }
 
-    public Map<String, Integer> getTimeInRooms() {
+    public Map<String, Long> getTimeInRooms() {
         return timeInRooms;
     }
 
-    public void setTimeInRooms(Map<String, Integer> timeInRooms) {
+    public void setTimeInRooms(Map<String, Long> timeInRooms) {
         this.timeInRooms = timeInRooms;
+    }
+
+    public String getCurrentRoom() {
+        return currentRoom;
+    }
+
+    public void setCurrentRoom(String currentRoom) {
+        this.currentRoom = currentRoom;
+    }
+
+    public void newTimeForRoom(String room, Long time) {
+        timeInRooms.remove(room);
+        timeInRooms.put(room, time);
     }
 }

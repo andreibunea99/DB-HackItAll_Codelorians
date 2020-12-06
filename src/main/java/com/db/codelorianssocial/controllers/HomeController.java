@@ -133,8 +133,16 @@ public class HomeController {
             }
             if (roomId == 105) {
                 Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-exit " + myUser.getName() + "\"}");
+
+                Long roomExitTime = System.nanoTime();
+                if (myUser.getCurrentRoom() != null) {
+                    long lastTime = myUser.getTimeInRooms().get(myUser.getCurrentRoom());
+                    myUser.newTimeForRoom(myUser.getCurrentRoom(), roomExitTime - lastTime);
+                }
+
                 Stats.showStats(myUser);
                 myUser.getTimeInRooms().clear();
+                myUser.setCurrentRoom(null);
                 return "index";
             }
         } else {
@@ -142,7 +150,16 @@ public class HomeController {
 
             if (roomId != roomsService.getUserRoom(myUser.getName())) {
                 Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + myUser.getName() + " " + roomID + "\"}");
-                myUser.getTimeInRooms().put(String.valueOf(roomId), 100);
+
+                Long roomEnterTime = System.nanoTime();
+
+                if (myUser.getCurrentRoom() != null) {
+                    long lastTime = myUser.getTimeInRooms().get(myUser.getCurrentRoom());
+                    myUser.newTimeForRoom(myUser.getCurrentRoom(), roomEnterTime - lastTime);
+                }
+
+                myUser.getTimeInRooms().put(String.valueOf(roomId), roomEnterTime);
+                myUser.setCurrentRoom(String.valueOf(roomId));
             }
         }
 
