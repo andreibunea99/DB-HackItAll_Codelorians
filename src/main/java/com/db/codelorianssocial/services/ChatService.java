@@ -29,6 +29,10 @@ public class ChatService {
         List<String> stringList = new ArrayList<>();
         list = chatDao.list();
         for (Message msg : list) {
+            if (msg.getMessage().equals("entered the chat")) {
+                System.out.println("evitat");
+                continue;
+            }
             String message = "[" + msg.getUsername() + "]" + " " + msg.getMessage();
             stringList.add(message);
         }
@@ -64,6 +68,9 @@ public class ChatService {
         List<String> stringList = new ArrayList<>();
         list = chatDao.list();
         for (Message msg : list) {
+            if (msg.getMessage().equals("entered the chat")) {
+                continue;
+            }
             String message = "[" + msg.getUsername() + "]" + " " + msg.getMessage();
             stringList.add(message);
         }
