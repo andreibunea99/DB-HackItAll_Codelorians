@@ -146,7 +146,20 @@ public class HomeController {
             }
         }
 
+        if (request.getParameter("id").equals("4")) {
+            return getGame1(model);
+        }
+
         return "discord";
+    }
+
+    @RequestMapping("/gameroom1")
+    public String getGame1(Model model) {
+        List<User> userList = new ArrayList<>();
+        List<String> messageList = new ArrayList<>();
+        model.addAttribute("list", userList);
+        model.addAttribute("messages", messageList);
+        return "game1";
     }
 
     @GetMapping("/get-rooms-info")

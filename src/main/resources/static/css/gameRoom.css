@@ -1,0 +1,44 @@
+body {
+    background-color: #1DA1F2;
+}
+
+.userTable {
+    position: absolute;
+    height: 90vh;
+    top: 5vh;
+    width: 20vw;
+    left: 2vw;
+    color: #F5F8FA;
+    background-color: #657786;
+}
+
+.messageTable {
+    position: absolute;
+    height: 70vh;
+    top: 5vh;
+    width: 60vw;
+    left: 25vw;
+    color: #F5F8FA;
+    background-color: #657786;
+}
+
+.messageBox {
+    position: absolute;
+    top: 80vh;
+    width: 60vw;
+    left: 25vw;
+}
+
+.chatBody {
+    background-color: #F5F8FA;
+    color: #14171A;
+}
+
+.submitMessage {
+    position: absolute;
+    top: 83vh;
+    height: 4.7vh;
+    left: 86vw;
+    background-color: #14171A;
+    color: #F5F8FA;
+}
