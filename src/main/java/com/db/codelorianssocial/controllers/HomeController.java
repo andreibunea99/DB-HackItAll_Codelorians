@@ -1,9 +1,6 @@
 package com.db.codelorianssocial.controllers;
 
-import com.db.codelorianssocial.dao.ChatDao;
-import com.db.codelorianssocial.dao.ChatDaoImpl;
-import com.db.codelorianssocial.dao.UserDao;
-import com.db.codelorianssocial.dao.UserDaoImpl;
+import com.db.codelorianssocial.dao.*;
 import com.db.codelorianssocial.entity.Message;
 import com.db.codelorianssocial.entity.RequestUser;
 import com.db.codelorianssocial.entity.User;
@@ -65,12 +62,19 @@ public class HomeController {
     public ChatDao getchatDAO(DataSource dataSource) {
         return new ChatDaoImpl(dataSource);
     }
+    @Bean
+    public SecondChatDao getsecondchatDAO(DataSource dataSource) {
+        return new SecondChatDaoImpl(dataSource);
+    }
 
     @Autowired
     private UserDao userDao;
 
     @Autowired
     private ChatDao chatDao;
+
+    @Autowired
+    private SecondChatDao secondChatDao;
 
     RoomsService roomsService = new RoomsService();
 
@@ -179,6 +183,10 @@ public class HomeController {
             return getGame1(model);
         }
 
+        if (request.getParameter("id").equals("5")) {
+            return getGame2(model);
+        }
+
         return "discord";
     }
 
@@ -198,10 +206,32 @@ public class HomeController {
     }
 
     @RequestMapping(value="/chat", method = RequestMethod.POST)
-    public String login(@ModelAttribute("message")String message, Model model) {
+    public String chat(@ModelAttribute("message")String message, Model model) {
         chatDao.save(new Message(AuthService.getUser().getId(), message));
 
         return getGame1(model);
+    }
+
+    @RequestMapping("/gameroom2")
+    public String getGame2(Model model) {
+        List<String> userList = new ArrayList<>();
+
+        ArrayList<String> peopleInGameRoom = roomsService.getRooms().get(3).getPeopleInRoom();
+        for (int i = 0; i < peopleInGameRoom.size(); ++i) {
+            userList.add(peopleInGameRoom.get(i));
+        }
+
+        List<String> messageList = ChatService.getInstance().getMessageList(secondChatDao);
+        model.addAttribute("list", userList);
+        model.addAttribute("messages", messageList);
+        return "game2";
+    }
+
+    @RequestMapping(value="/chat2", method = RequestMethod.POST)
+    public String chat2(@ModelAttribute("message")String message, Model model) {
+        secondChatDao.save(new Message(AuthService.getUser().getId(), message));
+
+        return getGame2(model);
     }
 
     @GetMapping("/get-rooms-info")
