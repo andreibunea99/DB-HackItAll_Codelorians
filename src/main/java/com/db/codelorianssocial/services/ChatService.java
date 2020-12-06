@@ -1,5 +1,6 @@
 package com.db.codelorianssocial.services;
 
+import com.db.codelorianssocial.dao.ChatDao;
 import com.db.codelorianssocial.dao.UserDao;
 import com.db.codelorianssocial.entity.Message;
 import com.db.codelorianssocial.entity.RequestUser;
@@ -23,10 +24,11 @@ public class ChatService {
         return instance;
     }
 
-
-    public List<String> getMessageList() {
+    public List<String> getMessageList(ChatDao chatDao) {
         List<String> stringList = new ArrayList<>();
+        list = chatDao.list();
         for (Message msg : list) {
+            System.out.println("In for: " + msg.getMessage());
             String message = "[" + msg.getUsername() + "]" + " " + msg.getMessage();
             stringList.add(message);
         }

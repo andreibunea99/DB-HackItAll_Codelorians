@@ -1,12 +1,16 @@
 package com.db.codelorianssocial.controllers;
 
+import com.db.codelorianssocial.dao.ChatDao;
+import com.db.codelorianssocial.dao.ChatDaoImpl;
 import com.db.codelorianssocial.dao.UserDao;
 import com.db.codelorianssocial.dao.UserDaoImpl;
+import com.db.codelorianssocial.entity.Message;
 import com.db.codelorianssocial.entity.RequestUser;
 import com.db.codelorianssocial.entity.User;
 import com.db.codelorianssocial.models.CurrentUser;
 import com.db.codelorianssocial.services.AuthService;
 import com.db.codelorianssocial.models.Room;
+import com.db.codelorianssocial.services.ChatService;
 import com.db.codelorianssocial.services.RoomsService;
 import com.db.codelorianssocial.utils.Constants;
 import com.db.codelorianssocial.utils.Requests;
@@ -57,8 +61,16 @@ public class HomeController {
         return new UserDaoImpl(dataSource);
     }
 
+    @Bean
+    public ChatDao getchatDAO(DataSource dataSource) {
+        return new ChatDaoImpl(dataSource);
+    }
+
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private ChatDao chatDao;
 
     RoomsService roomsService = new RoomsService();
 
@@ -172,17 +184,26 @@ public class HomeController {
 
     @RequestMapping("/gameroom1")
     public String getGame1(Model model) {
-        ArrayList<String> userList = new ArrayList<>();
-        ArrayList<String> messageList = new ArrayList<>();
+        List<String> userList = new ArrayList<>();
 
         ArrayList<String> peopleInGameRoom = roomsService.getRooms().get(3).getPeopleInRoom();
         for (int i = 0; i < peopleInGameRoom.size(); ++i) {
             userList.add(peopleInGameRoom.get(i));
         }
 
+        List<String> messageList = ChatService.getInstance().getMessageList(chatDao);
+        System.out.println(messageList);
         model.addAttribute("list", userList);
         model.addAttribute("messages", messageList);
         return "game1";
+    }
+
+    @RequestMapping(value="/chat", method = RequestMethod.POST)
+    public String login(@ModelAttribute("message")String message, Model model) {
+        System.out.println("Got message: " + message);
+        chatDao.save(new Message(AuthService.getUser().getId(), message));
+
+        return getGame1(model);
     }
 
     @GetMapping("/get-rooms-info")

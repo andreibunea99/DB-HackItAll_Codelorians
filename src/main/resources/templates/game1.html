@@ -70,10 +70,10 @@
     </tbody>
 </table>
 
-<form>
-    <div class="form-group messageBox">
+<form action="#" th:action="@{/chat}" method="post">
+    <div class="form-group messageBox" >
         <label for="message">Message:</label>
-        <input type="text" class="form-control" id="message">
+        <input type="text" class="form-control" id="message" name="message">
     </div>
     <button type="submit" class="btn btn-primary submitMessage">Submit</button>
 </form>

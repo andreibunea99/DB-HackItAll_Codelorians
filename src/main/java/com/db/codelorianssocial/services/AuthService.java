@@ -16,6 +16,16 @@ public class AuthService {
     private Map<String, User> users = new HashMap<>();
     private static AuthService instance = null;
 
+    private static User user = null;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public static User getUser() {
+        return user;
+    }
+
     private AuthService(){}
 
     public static AuthService getInstance() {
@@ -42,6 +52,7 @@ public class AuthService {
             return false;
         }
         else {
+            setUser(userDao.get(user.getId()));
             return true;
         }
     }
