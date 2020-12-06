@@ -28,7 +28,6 @@ public class ChatService {
         List<String> stringList = new ArrayList<>();
         list = chatDao.list();
         for (Message msg : list) {
-            System.out.println("In for: " + msg.getMessage());
             String message = "[" + msg.getUsername() + "]" + " " + msg.getMessage();
             stringList.add(message);
         }

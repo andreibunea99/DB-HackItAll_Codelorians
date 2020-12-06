@@ -192,7 +192,6 @@ public class HomeController {
         }
 
         List<String> messageList = ChatService.getInstance().getMessageList(chatDao);
-        System.out.println(messageList);
         model.addAttribute("list", userList);
         model.addAttribute("messages", messageList);
         return "game1";
@@ -200,7 +199,6 @@ public class HomeController {
 
     @RequestMapping(value="/chat", method = RequestMethod.POST)
     public String login(@ModelAttribute("message")String message, Model model) {
-        System.out.println("Got message: " + message);
         chatDao.save(new Message(AuthService.getUser().getId(), message));
 
         return getGame1(model);
