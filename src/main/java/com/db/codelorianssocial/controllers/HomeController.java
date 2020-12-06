@@ -4,11 +4,13 @@ import com.db.codelorianssocial.dao.UserDao;
 import com.db.codelorianssocial.dao.UserDaoImpl;
 import com.db.codelorianssocial.entity.RequestUser;
 import com.db.codelorianssocial.entity.User;
+import com.db.codelorianssocial.models.CurrentUser;
 import com.db.codelorianssocial.services.AuthService;
 import com.db.codelorianssocial.models.Room;
 import com.db.codelorianssocial.services.RoomsService;
 import com.db.codelorianssocial.utils.Constants;
 import com.db.codelorianssocial.utils.Requests;
+import com.db.codelorianssocial.utils.Stats;
 import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -24,12 +26,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HomeController {
 
     boolean hidden = true;
-    String myUser = "Adi";
+    CurrentUser myUser = new CurrentUser("Adi");
     String loginFailed = null;
     String registerFailed = null;
     String registerSuccess = null;
@@ -117,22 +120,29 @@ public class HomeController {
 
         if (roomId > 100) {
             if (roomId == 101) {
-                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-mute " + myUser + "\"}");
+                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-mute " + myUser.getName() + "\"}");
             }
             if (roomId == 102) {
-                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-unmute " + myUser + "\"}");
+                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-unmute " + myUser.getName() + "\"}");
             }
             if (roomId == 103) {
-                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-deafen " + myUser + "\"}");
+                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-deafen " + myUser.getName() + "\"}");
             }
             if (roomId == 104) {
-                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-undeafen " + myUser + "\"}");
+                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-undeafen " + myUser.getName() + "\"}");
+            }
+            if (roomId == 105) {
+                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-exit " + myUser.getName() + "\"}");
+                Stats.showStats(myUser);
+                myUser.getTimeInRooms().clear();
+                return "index";
             }
         } else {
             String roomID = Constants.roomIds[roomId];
 
-            if (roomId != roomsService.getUserRoom(myUser)) {
-                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + myUser + " " + roomID + "\"}");
+            if (roomId != roomsService.getUserRoom(myUser.getName())) {
+                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-move " + myUser.getName() + " " + roomID + "\"}");
+                myUser.getTimeInRooms().put(String.valueOf(roomId), 100);
             }
         }
 
@@ -211,7 +221,7 @@ public class HomeController {
             page = "index";
         }
 
-        myUser = user.getId();
+        myUser.setName(user.getId());
 
         model.addAttribute("loginFlag", loginFailed);
 

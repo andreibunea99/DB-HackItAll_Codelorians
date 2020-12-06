@@ -103,6 +103,21 @@ client.on('message', message => {
             }
         })
     }
+
+    if (command === 'exit') {
+        var userName = args[0];
+
+        client.guilds.fetch('784718151219937290').then((guild) => {
+            var members = guild.members;
+            for (const [key, value] of members.cache) {
+                if (value.nickname === userName) {
+                    members.fetch(value.id).then((user) => {
+                        user.edit({channel_id:null});
+                    })
+                }
+            }
+        })
+    }
 });
 
 client.on('voiceStateUpdate', (oldMember, newMember) => {
