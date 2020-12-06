@@ -1,8 +1,14 @@
 package com.db.codelorianssocial.services;
 
+import com.db.codelorianssocial.dao.UserDao;
+import com.db.codelorianssocial.dao.UserDaoImpl;
 import com.db.codelorianssocial.entity.RequestUser;
 import com.db.codelorianssocial.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,25 +25,24 @@ public class AuthService {
         return instance;
     }
 
-    public boolean register(User user) {
-        if (users.containsKey(user.getId())) {
-            System.out.println("User already has an account");
+    public boolean register(User user, UserDao userDao) {
+        if (userDao.get(user.getId()) != null) {
             return false;
         }
         else {
-            users.put(user.getId(), user);
-            System.out.println("Registered!");
+            userDao.save(user);
             return true;
         }
     }
 
-    public boolean login(RequestUser user) {
-        System.out.println("Intru in user");
-        System.out.println(user);
-        if (users.containsKey(user.getId()) && users.get(user.getId()).getPassword().equals(user.getPassword())) {
-            return true;
-        } else {
+    public boolean login(RequestUser user, UserDao userDao) {
+        if (userDao.get(user.getId()) == null) {
             return false;
+        } else if (!userDao.get(user.getId()).getPassword().equals(user.getPassword())) {
+            return false;
+        }
+        else {
+            return true;
         }
     }
 

@@ -6,6 +6,13 @@ public class User {
     private String email;
     private String discord;
 
+    public User(String id, String email, String discord, String password) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.discord = discord;
+    }
+
     public String getId() {
         return id;
     }

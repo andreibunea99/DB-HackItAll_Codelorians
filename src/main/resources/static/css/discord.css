@@ -232,3 +232,12 @@ body {
     top: 94vh;
     color: black;
 }
+
+.exitButton {
+    position: absolute;
+    width: 15.3vw;
+    height: 29vh;
+    left: 77vw;
+    top: 96vh;
+    color: black;
+}

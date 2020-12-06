@@ -1,5 +1,7 @@
 package com.db.codelorianssocial.controllers;
 
+import com.db.codelorianssocial.dao.UserDao;
+import com.db.codelorianssocial.dao.UserDaoImpl;
 import com.db.codelorianssocial.entity.RequestUser;
 import com.db.codelorianssocial.entity.User;
 import com.db.codelorianssocial.services.AuthService;
@@ -9,11 +11,14 @@ import com.db.codelorianssocial.utils.Constants;
 import com.db.codelorianssocial.utils.Requests;
 import org.apache.coyote.Request;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -31,6 +36,26 @@ public class HomeController {
     boolean isLogged = false;
     boolean triedButton = false;
     String accessFailed = null;
+
+    @Bean
+    public DataSource getDataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://ur91o7rxcka2s44f:PUUY8X6HB4zW33repWr1@bv3jx1dksltsqbot8aim-mysql.services.clever-cloud.com:3306/bv3jx1dksltsqbot8aim");
+        dataSource.setUsername("ur91o7rxcka2s44f");
+        dataSource.setPassword("PUUY8X6HB4zW33repWr1");
+
+        return dataSource;
+    }
+
+    @Bean
+    public UserDao getUserDAO(DataSource dataSource) {
+        return new UserDaoImpl(dataSource);
+    }
+
+    @Autowired
+    private UserDao userDao;
 
     RoomsService roomsService = new RoomsService();
 
@@ -66,6 +91,8 @@ public class HomeController {
         if (!isLogged) {
             accessFailed = "Please login!";
             return mainPage(model);
+        } else {
+            accessFailed = null;
         }
 
         participants.add("");
@@ -175,11 +202,12 @@ public class HomeController {
         String page = "authentification";
 
         System.out.println(user.getId() + " " + user.getPassword());
-        if (!authService.login(user)) {
+        if (!authService.login(user, userDao)) {
             loginFailed = "Userul nu exista!";
         } else {
             loginFailed = null;
             isLogged = true;
+            accessFailed = null;
             page = "index";
         }
 
@@ -197,7 +225,7 @@ public class HomeController {
     @RequestMapping(value="/register", method = RequestMethod.POST)
     public String register(@ModelAttribute("user")User user, Model model) {
 
-        if (!authService.register(user)) {
+        if (!authService.register(user, userDao)) {
             registerFailed = "Userul deja exista!";
             registerSuccess = null;
         } else {
