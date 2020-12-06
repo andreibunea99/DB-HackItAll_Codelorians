@@ -34,6 +34,16 @@ body {
     color: #14171A;
 }
 
+.gameLinks {
+    position: absolute;
+    height: 35vh;
+    top: 57vh;
+    width: 20vw;
+    left: 2vw;
+    color: #F5F8FA;
+    background-color: #657786;
+}
+
 .submitMessage {
     position: absolute;
     top: 83vh;

@@ -207,7 +207,9 @@ public class HomeController {
 
     @RequestMapping(value="/chat", method = RequestMethod.POST)
     public String chat(@ModelAttribute("message")String message, Model model) {
-        chatDao.save(new Message(AuthService.getUser().getId(), message));
+        if (message != null) {
+            chatDao.save(new Message(AuthService.getUser().getId(), message));
+        }
 
         return getGame1(model);
     }
