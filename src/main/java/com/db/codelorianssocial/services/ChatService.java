@@ -40,13 +40,9 @@ public class ChatService {
         List<String> userList = new ArrayList<>();
         list = chatDao.list();
         for (Message msg : list) {
-            if (msg.getUsername() nu e in list) {
-                adaugi la list
+            if (!userList.contains(msg.getUsername())) {
+                userList.add(msg.getUsername());
             }
-        }
-//            String message = "[" + msg.getUsername() + "]" + " " + msg.getMessage();
-//            stringList.add(message);
-
         }
 
         return userList;
@@ -56,11 +52,13 @@ public class ChatService {
         List<String> userList = new ArrayList<>();
         list = chatDao.list();
         for (Message msg : list) {
-            if (msg.getUsername() nu e in list) {
-                adaugi la list
+            if (!userList.contains(msg.getUsername())) {
+                userList.add(msg.getUsername());
             }
         }
-        }
+
+        return userList;
+    }
 
     public List<String> getMessageList(SecondChatDao chatDao) {
         List<String> stringList = new ArrayList<>();

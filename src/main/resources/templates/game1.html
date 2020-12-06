@@ -13,18 +13,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@200&display=swap" rel="stylesheet">
 
-    <script type="text/javascript">
-        function drawRooms() {
-            var rooms = document.getElementById("rooms").value;
-            var listRooms = rooms.split`,`.map(x=>+x);
-            var theRemovedElement = listRooms.shift();
-            var theRemovedElement = listRooms.pop();
-
-
-            console.log(listRooms);
-        }
-    </script>
-
     <style>
         .square {
             height: 50px;
@@ -74,14 +62,32 @@
 <table class="table gameLinks">
     <thead class="thead-dark">
     <tr>
-        <th scope="col">Links</th>
+        <th scope="col">Suggested Games</th>
     </tr>
     </thead>
     <tbody class="chatBody">
-    <tr><td><a th:target="_blank" th:href="@{https://skribbl.io}" >skribbl</a></td></tr>
-    <tr><td><a th:target="_blank" th:href="@{https://www.horsepaste.com}" >codenames</a></td></tr>
-    <tr><td><a th:target="_blank" th:href="@{https://colonist.io}" >catan</a></td></tr>
-    <tr><td><a th:target="_blank" th:href="@{https://www.isc.ro}" >scrabble</a></td></tr>
+    <tr>
+        <td><a th:target="_blank" th:href="@{https://skribbl.io}" >Skribbl.io</a></td>
+        <td class="logo">
+            <img
+                    src="https://image.winudf.com/v2/image/Y29tLnNrcmliYmwuZnVuZ2FtZV9pY29uXzE1MzU2NDM4MDFfMDA2/icon.png?w=170&fakeurl=1"
+                    height=50vh width=50vh>
+        </td>
+    </tr>
+    <tr>
+        <td><a th:target="_blank" th:href="@{https://www.horsepaste.com}" >codenames</a></td>
+        <td class="logo">
+            <img
+                    src="https://image.winudf.com/v2/image1/Y29tLnBpZXJvZ2lfYXR0YWNrX3N0dWRpb3MuY29kZW5hbWVzX3NjcmVlbl8wXzE1ODYxMjc5MjFfMDY5/screen-0.jpg?fakeurl=1&type=.jpg"
+                    height=50vh width=75vh>
+        </td>
+    </tr>
+    <tr>
+        <td><a th:target="_blank" th:href="@{https://colonist.io}" >catan</a></td>
+    </tr>
+    <tr>
+        <td><a th:target="_blank" th:href="@{https://www.isc.ro}" >scrabble</a></td>
+    </tr>
     </tbody>
 </table>
 
