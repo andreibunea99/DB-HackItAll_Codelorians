@@ -77,6 +77,10 @@ body {
     background-color: #d97c7c;
 }
 
+span {
+    color: #14171A;
+}
+
 .alertRegisterSuccess {
     position: absolute;
     width: 30vw;
