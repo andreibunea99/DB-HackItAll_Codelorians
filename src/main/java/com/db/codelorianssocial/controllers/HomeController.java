@@ -192,12 +192,13 @@ public class HomeController {
 
     @RequestMapping("/gameroom1")
     public String getGame1(Model model) {
-        List<String> userList = new ArrayList<>();
+        chatDao.save(new Message(AuthService.getUser().getId(), "entered the chat"));
+        List<String> userList = ChatService.getInstance().getUsersList(chatDao);
 
-        ArrayList<String> peopleInGameRoom = roomsService.getRooms().get(3).getPeopleInRoom();
-        for (int i = 0; i < peopleInGameRoom.size(); ++i) {
-            userList.add(peopleInGameRoom.get(i));
-        }
+//        ArrayList<String> peopleInGameRoom = roomsService.getRooms().get(3).getPeopleInRoom();
+//        for (int i = 0; i < peopleInGameRoom.size(); ++i) {
+//            userList.add(peopleInGameRoom.get(i));
+//        }
 
         List<String> messageList = ChatService.getInstance().getMessageList(chatDao);
         model.addAttribute("list", userList);
@@ -216,12 +217,13 @@ public class HomeController {
 
     @RequestMapping("/gameroom2")
     public String getGame2(Model model) {
-        List<String> userList = new ArrayList<>();
+        secondChatDao.save(new Message(AuthService.getUser().getId(), "entered the chat"));
+        List<String> userList = ChatService.getInstance().getUsersList(secondChatDao);
 
-        ArrayList<String> peopleInGameRoom = roomsService.getRooms().get(3).getPeopleInRoom();
-        for (int i = 0; i < peopleInGameRoom.size(); ++i) {
-            userList.add(peopleInGameRoom.get(i));
-        }
+//        ArrayList<String> peopleInGameRoom = roomsService.getRooms().get(3).getPeopleInRoom();
+//        for (int i = 0; i < peopleInGameRoom.size(); ++i) {
+//            userList.add(peopleInGameRoom.get(i));
+//        }
 
         List<String> messageList = ChatService.getInstance().getMessageList(secondChatDao);
         model.addAttribute("list", userList);
