@@ -1,6 +1,7 @@
 package com.db.codelorianssocial.services;
 
 import com.db.codelorianssocial.dao.ChatDao;
+import com.db.codelorianssocial.dao.SecondChatDao;
 import com.db.codelorianssocial.dao.UserDao;
 import com.db.codelorianssocial.entity.Message;
 import com.db.codelorianssocial.entity.RequestUser;
@@ -25,6 +26,17 @@ public class ChatService {
     }
 
     public List<String> getMessageList(ChatDao chatDao) {
+        List<String> stringList = new ArrayList<>();
+        list = chatDao.list();
+        for (Message msg : list) {
+            String message = "[" + msg.getUsername() + "]" + " " + msg.getMessage();
+            stringList.add(message);
+        }
+
+        return stringList;
+    }
+
+    public List<String> getMessageList(SecondChatDao chatDao) {
         List<String> stringList = new ArrayList<>();
         list = chatDao.list();
         for (Message msg : list) {
