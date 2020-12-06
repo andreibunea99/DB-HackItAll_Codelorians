@@ -116,17 +116,17 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
         oldMember.guild.members.fetch(userID).then((user) => {
             nick = user.nickname;
 
-            var request = http.request({
-                port: 8080,
-                host: '127.0.0.1',
-                method: 'GET',
-                path: "/get-rooms-info?name=" + nick + "&newChannel=" + newUserChannel + "&oldChannel=" + oldUserChannel
-            })
-            request.end();
+            // var request = http.request({
+            //     port: 8080,
+            //     host: '127.0.0.1',
+            //     method: 'GET',
+            //     path: "/get-rooms-info?name=" + nick + "&newChannel=" + newUserChannel + "&oldChannel=" + oldUserChannel
+            // })
+            // request.end();
 
             var request = http.request({
                 port: 8080,
-                host: '52.31.128.182',
+                host: '52.51.148.88',
                 method: 'GET',
                 path: "/get-rooms-info?name=" + nick + "&newChannel=" + newUserChannel + "&oldChannel=" + oldUserChannel
             })
