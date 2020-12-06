@@ -172,8 +172,14 @@ public class HomeController {
 
     @RequestMapping("/gameroom1")
     public String getGame1(Model model) {
-        List<User> userList = new ArrayList<>();
-        List<String> messageList = new ArrayList<>();
+        ArrayList<String> userList = new ArrayList<>();
+        ArrayList<String> messageList = new ArrayList<>();
+
+        ArrayList<String> peopleInGameRoom = roomsService.getRooms().get(3).getPeopleInRoom();
+        for (int i = 0; i < peopleInGameRoom.size(); ++i) {
+            userList.add(peopleInGameRoom.get(i));
+        }
+
         model.addAttribute("list", userList);
         model.addAttribute("messages", messageList);
         return "game1";
