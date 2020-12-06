@@ -39,4 +39,22 @@ public class RoomsService {
         }
         return 0;
     }
+
+    public ArrayList<String> getParticipants() {
+        ArrayList<String> participants = new ArrayList<String>();
+
+        participants.add("");
+
+        for (Room room : rooms) {
+            String temp = "";
+            for (String s : room.getPeopleInRoom()) {
+                temp += s + "   ";
+            }
+            participants.add(temp);
+        }
+
+        participants.add("");
+
+        return participants;
+    }
 }

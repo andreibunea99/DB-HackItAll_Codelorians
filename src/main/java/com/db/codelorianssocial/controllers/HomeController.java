@@ -34,6 +34,7 @@ public class HomeController {
 
     boolean hidden = true;
     CurrentUser myUser = new CurrentUser("Adi");
+    private AuthService authService = AuthService.getInstance();
     String loginFailed = null;
     String registerFailed = null;
     String registerSuccess = null;
@@ -44,11 +45,10 @@ public class HomeController {
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://ur91o7rxcka2s44f:PUUY8X6HB4zW33repWr1@bv3jx1dksltsqbot8aim-mysql.services.clever-cloud.com:3306/bv3jx1dksltsqbot8aim");
-        dataSource.setUsername("ur91o7rxcka2s44f");
-        dataSource.setPassword("PUUY8X6HB4zW33repWr1");
+        dataSource.setDriverClassName(Constants.dbDriver);
+        dataSource.setUrl(Constants.dbURL);
+        dataSource.setUsername(Constants.dbUser);
+        dataSource.setPassword(Constants.dbPassword);
 
         return dataSource;
     }
@@ -104,7 +104,6 @@ public class HomeController {
     public String discordPage(Model model, HttpServletRequest request) throws IOException, InterruptedException {
         hidden = !hidden;
 
-        ArrayList<String> participants = new ArrayList<String>();
         triedButton = true;
 
         if (!isLogged) {
@@ -114,18 +113,7 @@ public class HomeController {
             accessFailed = null;
         }
 
-        participants.add("");
-
-        for (int i = 0; i < roomsService.getRooms().size(); ++i) {
-            StringBuilder ret = new StringBuilder();
-            ArrayList<String> temp = roomsService.getRooms().get(i).getPeopleInRoom();
-            for (String s : temp) {
-                ret.append(s).append("   ");
-            }
-            participants.add(ret.toString());
-        }
-
-        participants.add("");
+        ArrayList<String> participants = roomsService.getParticipants();
 
         model.addAttribute("rooms", participants);
 
@@ -135,22 +123,9 @@ public class HomeController {
         int roomId = Integer.parseInt(request.getParameter("id"));
 
         if (roomId > 100) {
-            if (roomId == 101) {
-                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-mute " + myUser.getName() + "\"}");
-            }
-            if (roomId == 102) {
-                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-unmute " + myUser.getName() + "\"}");
-            }
-            if (roomId == 103) {
-                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-deafen " + myUser.getName() + "\"}");
-            }
-            if (roomId == 104) {
-                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-undeafen " + myUser.getName() + "\"}");
-            }
+            Requests.sendMessage(Constants.PostURL, Requests.getCommandContent(roomId, myUser.getName()));
             if (roomId == 105) {
-                Requests.sendMessage(Constants.PostURL, "{\"content\" : \"-exit " + myUser.getName() + "\"}");
-
-                Long roomExitTime = System.nanoTime();
+                long roomExitTime = System.nanoTime();
                 if (myUser.getCurrentRoom() != null) {
                     long lastTime = myUser.getTimeInRooms().get(myUser.getCurrentRoom());
                     myUser.newTimeForRoom(myUser.getCurrentRoom(), roomExitTime - lastTime);
@@ -257,44 +232,13 @@ public class HomeController {
             rooms.get(oldRoomId - 1).removeFromRoom(name);
         }
 
-//        for (Room room : rooms) {
-//            System.out.println("People in room " + room.getId() + ": ");
-//            for (String person : room.getPeopleInRoom()) {
-//                System.out.print(person + " ");
-//            }
-//            System.out.println();
-//        }
-//        System.out.println();
-
         // Rooms to html
-        ArrayList<String> participants = new ArrayList<String>();
-
-        participants.add("");
-
-        for (int i = 0; i < roomsService.getRooms().size(); ++i) {
-            String ret = "";
-            ArrayList<String> temp = roomsService.getRooms().get(i).getPeopleInRoom();
-            for (String s : temp) {
-                ret += s + "   ";
-            }
-            participants.add(ret);
-        }
-
-        participants.add("");
+        ArrayList<String> participants = roomsService.getParticipants();
 
         model.addAttribute("rooms", participants);
 
         return getMap(model);
     }
-
-    private AuthService authService = AuthService.getInstance();
-
-//    @RequestMapping(value="/authentification", method = RequestMethod.POST)
-//    public String login(@ModelAttribute("user")RequestUser user, Model model) {
-//        System.out.println(user.getId() + " " + user.getPassword());
-//
-//        return "discord";
-//    }
 
     @RequestMapping(value="/login", method = RequestMethod.POST)
     public String login(@ModelAttribute("user")RequestUser user, Model model) {

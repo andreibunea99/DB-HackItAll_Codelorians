@@ -4,7 +4,7 @@ body {
 
 .userTable {
     position: absolute;
-    height: 50vh;
+    height: 40vh;
     top: 5vh;
     width: 20vw;
     left: 2vw;
@@ -37,7 +37,7 @@ body {
 .gameLinks {
     position: absolute;
     height: 35vh;
-    top: 57vh;
+    top: 50vh;
     width: 20vw;
     left: 2vw;
     color: #F5F8FA;

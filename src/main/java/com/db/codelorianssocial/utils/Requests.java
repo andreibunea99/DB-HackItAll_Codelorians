@@ -20,4 +20,35 @@ public class Requests {
 
         return response.body();
     }
+
+    public static String getCommandContent(int command, String user) {
+        String ret = "{\"content\" : \"-";
+
+        switch (command) {
+            case 101: {
+                ret += "mute ";
+                break;
+            }
+            case 102: {
+                ret += "unmute ";
+                break;
+            }
+            case 103: {
+                ret += "deafen ";
+                break;
+            }
+            case 104: {
+                ret += "undeafen ";
+                break;
+            }
+            case 105: {
+                ret += "exit ";
+                break;
+            }
+        }
+
+        ret += user + "\"}";
+
+        return ret;
+    }
 }

@@ -5,13 +5,9 @@ const { on } = require('process');
 
 const client = new Discord.Client();
 
-var canal;
-
 client.once('ready', () => {
     console.log('I\'m online');
 });
-
-console.log(client.guilds);
 
 const prefix = '-';
 
@@ -27,9 +23,8 @@ client.on('message', message => {
         message.channel.send('sal!');
     }
 
+    var userName = args[0];
     if (command === 'move') {
-
-        var userName = args[0];
         var channelName = args[1];
 
         client.guilds.fetch('784718151219937290').then((guild) => {
@@ -45,8 +40,6 @@ client.on('message', message => {
     }
 
     if (command === 'mute') {
-        var userName = args[0];
-
         client.guilds.fetch('784718151219937290').then((guild) => {
             var members = guild.members;
             for (const [key, value] of members.cache) {
@@ -60,8 +53,6 @@ client.on('message', message => {
     }
 
     if (command === 'unmute') {
-        var userName = args[0];
-
         client.guilds.fetch('784718151219937290').then((guild) => {
             var members = guild.members;
             for (const [key, value] of members.cache) {
@@ -75,8 +66,6 @@ client.on('message', message => {
     }
 
     if (command === 'deafen') {
-        var userName = args[0];
-
         client.guilds.fetch('784718151219937290').then((guild) => {
             var members = guild.members;
             for (const [key, value] of members.cache) {
@@ -90,8 +79,6 @@ client.on('message', message => {
     }
 
     if (command === 'undeafen') {
-        var userName = args[0];
-
         client.guilds.fetch('784718151219937290').then((guild) => {
             var members = guild.members;
             for (const [key, value] of members.cache) {
@@ -105,8 +92,6 @@ client.on('message', message => {
     }
 
     if (command === 'exit') {
-        var userName = args[0];
-
         client.guilds.fetch('784718151219937290').then((guild) => {
             var members = guild.members;
             for (const [key, value] of members.cache) {
