@@ -33,7 +33,6 @@ public class ChatDaoImpl implements ChatDao{
         return jdbcTemplate.update(sql, message.getUsername(), message.getMessage());
     }
 
-
     @Override
     public List<Message> list() {
         String sql = "select * from gameRoom1Chat";
